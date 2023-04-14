@@ -1,0 +1,49 @@
+diff --git a/SRC/cublas_utils.c b/SRC/cublas_utils.c
+index fba1a3fa..9f63d24b 100644
+--- a/SRC/cublas_utils.c
++++ b/SRC/cublas_utils.c
+@@ -11,6 +11,7 @@ at the top-level directory.
+ #include "superlu_defs.h"
+ 
+ #ifdef GPU_ACC  //////////////////////////////  enable CUDA
++#include "cublas_utils.h"
+ 
+  void DisplayHeader()
+ {
+diff --git a/SRC/dlustruct_gpu.h b/SRC/dlustruct_gpu.h
+index a2697ae0..8b73c4b2 100644
+--- a/SRC/dlustruct_gpu.h
++++ b/SRC/dlustruct_gpu.h
+@@ -23,6 +23,7 @@
+ 
+ #include <cublas_v2.h>
+ #include <cuda_runtime.h>
++#include "cublas_utils.h"
+ // #include "sec_structs.h"
+ // #include "supernodal_etree.h"
+ 
+diff --git a/SRC/superlu_defs.h b/SRC/superlu_defs.h
+index 03bb032b..4b714ca3 100644
+--- a/SRC/superlu_defs.h
++++ b/SRC/superlu_defs.h
+@@ -116,7 +116,7 @@ static __inline__ unsigned long long _rdtsc(void)
+ 
+ #ifdef HAVE_CUDA  
+ #define GPU_ACC   // enable CUDA
+-#include "cublas_utils.h"
++//#include "cublas_utils.h"
+ #endif
+ 
+ /* MPI C complex datatype */
+diff --git a/SRC/zlustruct_gpu.h b/SRC/zlustruct_gpu.h
+index 8291b863..5e3bbf31 100644
+--- a/SRC/zlustruct_gpu.h
++++ b/SRC/zlustruct_gpu.h
+@@ -22,6 +22,7 @@
+ 
+ #include <cublas_v2.h>
+ #include <cuda_runtime.h>
++#include "cublas_utils.h"
+ // #include "sec_structs.h"
+ // #include "supernodal_etree.h"
+ 
