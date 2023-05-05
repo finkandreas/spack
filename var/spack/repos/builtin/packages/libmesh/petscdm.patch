@@ -1,0 +1,31 @@
+diff --git a/src/solvers/petscdmlibmeshimpl.C b/src/solvers/petscdmlibmeshimpl.C
+index 95f9baa9c..7122b2789 100644
+--- a/src/solvers/petscdmlibmeshimpl.C
++++ b/src/solvers/petscdmlibmeshimpl.C
+@@ -772,7 +772,7 @@ static PetscErrorCode DMCreateGlobalVector_libMesh(DM dm, Vec *x)
+   ierr = PetscObjectTypeCompare((PetscObject)dm, DMLIBMESH, &eq); CHKERRQ(ierr);
+ 
+   if (!eq)
+-    LIBMESH_SETERRQ2(((PetscObject)dm)->comm, PETSC_ERR_ARG_WRONG, "DM of type %s, not of type %s", ((PetscObject)dm)->type, DMLIBMESH);
++    LIBMESH_SETERRQ2(((PetscObject)dm)->comm, PETSC_ERR_ARG_WRONG, "DM of type %s, not of type %s", ((PetscObject)dm)->type_name, DMLIBMESH);
+ 
+   if (!dlm->sys)
+     SETERRQ(PETSC_COMM_WORLD, PETSC_ERR_ARG_WRONGSTATE, "No libMesh system set for DM_libMesh");
+@@ -819,7 +819,7 @@ static PetscErrorCode DMCreateMatrix_libMesh(DM dm, Mat * A)
+   ierr = PetscObjectTypeCompare((PetscObject)dm, DMLIBMESH, &eq); CHKERRQ(ierr);
+ 
+   if (!eq)
+-    LIBMESH_SETERRQ2(((PetscObject)dm)->comm, PETSC_ERR_ARG_WRONG, "DM of type %s, not of type %s", ((PetscObject)dm)->type, DMLIBMESH);
++    LIBMESH_SETERRQ2(((PetscObject)dm)->comm, PETSC_ERR_ARG_WRONG, "DM of type %s, not of type %s", ((PetscObject)dm)->type_name, DMLIBMESH);
+ 
+   if (!dlm->sys)
+     SETERRQ(PETSC_COMM_WORLD, PETSC_ERR_ARG_WRONGSTATE, "No libMesh system set for DM_libMesh");
+@@ -901,7 +901,7 @@ static PetscErrorCode  DMSetUp_libMesh(DM dm)
+   ierr = PetscObjectTypeCompare((PetscObject)dm, DMLIBMESH, &eq); CHKERRQ(ierr);
+ 
+   if (!eq)
+-    LIBMESH_SETERRQ2(((PetscObject)dm)->comm, PETSC_ERR_ARG_WRONG, "DM of type %s, not of type %s", ((PetscObject)dm)->type, DMLIBMESH);
++    LIBMESH_SETERRQ2(((PetscObject)dm)->comm, PETSC_ERR_ARG_WRONG, "DM of type %s, not of type %s", ((PetscObject)dm)->type_name, DMLIBMESH);
+ 
+   if (!dlm->sys)
+     SETERRQ(PETSC_COMM_WORLD, PETSC_ERR_ARG_WRONGSTATE, "No libMesh system set for DM_libMesh");
