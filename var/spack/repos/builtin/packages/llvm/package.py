@@ -212,7 +212,7 @@ class Llvm(CMakePackage, CudaPackage):
         description="Build with OpenMP capable thread sanitizer",
     )
     variant(
-        "openmp",
+        "openmp_buildtype",
         values=("project", conditional("runtime", when="+clang @12:")),
         default="runtime",
         description="Build OpenMP either as a runtime (with just-build Clang) "
