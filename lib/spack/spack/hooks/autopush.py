@@ -23,9 +23,12 @@ def post_install(spec, explicit):
 
     # Push the package to all autopush mirrors
     for mirror in spack.mirror.MirrorCollection(binary=True, autopush=True).values():
-        bindist.push_or_raise(
-            spec,
-            mirror.push_url,
-            bindist.PushOptions(force=True, regenerate_index=False, unsigned=not mirror.signed),
-        )
-        tty.msg(f"{spec.name}: Pushed to build cache: '{mirror.name}'")
+        try:
+            bindist.push_or_raise(
+                spec,
+                mirror.push_url,
+                bindist.PushOptions(force=True, regenerate_index=False, unsigned=not mirror.signed),
+            )
+            tty.msg(f"{spec.name}: Pushed to build cache: '{mirror.name}'")
+        except:
+            tty.warn(f"{spec.name}: Push to build cache: '{mirror.name}' failed (non-fatal)")
