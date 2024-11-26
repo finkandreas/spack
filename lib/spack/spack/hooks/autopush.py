@@ -23,7 +23,10 @@ def post_install(spec, explicit):
 
     # Push the package to all autopush mirrors
     for mirror in spack.mirror.MirrorCollection(binary=True, autopush=True).values():
-        signing_key = bindist.select_signing_key() if mirror.signed else None
-        with bindist.make_uploader(mirror=mirror, force=True, signing_key=signing_key) as uploader:
-            uploader.push_or_raise([spec])
-        tty.msg(f"{spec.name}: Pushed to build cache: '{mirror.name}'")
+        try:
+            signing_key = bindist.select_signing_key() if mirror.signed else None
+            with bindist.make_uploader(mirror=mirror, force=True, signing_key=signing_key) as uploader:
+                uploader.push_or_raise([spec])
+            tty.msg(f"{spec.name}: Pushed to build cache: '{mirror.name}'")
+        except:
+            tty.warn(f"{spec.name}: Push to build cache: '{mirror.name}' failed (non-fatal)")
